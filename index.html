@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BetTracker — SikkerBets</title>
+<style>
+:root{--bg:#07111d;--panel:#091b2c;--panel2:#0b2033;--line:#1c3b59;--blue:#168cff;--text:#f4f7fb;--muted:#8f9caf;--green:#52f1bd}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif}body{overflow-x:hidden}button{font:inherit;color:inherit}
+.app{width:100%;max-width:760px;margin:auto;min-height:100vh;padding:18px 16px 92px;background:radial-gradient(circle at 80% 4%,rgba(20,126,226,.12),transparent 27%),linear-gradient(180deg,#07111d,#06101a)}
+.header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 4px 15px}.brand{display:flex;align-items:center;gap:9px;min-width:0}.brandmark{width:58px;height:47px;display:flex;align-items:flex-end;gap:3px}.brandmark i{width:7px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,#38a9ff,#147de8);display:block}.brandmark i:nth-child(1){height:16px}.brandmark i:nth-child(2){height:24px}.brandmark i:nth-child(3){height:32px}.brandmark i:nth-child(4){height:41px}.brandtext h1{font-size:30px;line-height:1;margin:0;font-weight:800;letter-spacing:-1.5px}.brandtext h1 span{color:#168cff}.brandtext p{font-size:10.5px;color:#77879b;margin:5px 0 0;letter-spacing:.1px;white-space:nowrap}.headerRight{display:flex;align-items:center;gap:4px}.live{height:61px;border:1px solid #244a6c;border-radius:34px;padding:8px 15px;display:flex;align-items:center;gap:9px;min-width:174px;background:rgba(6,19,31,.5)}.live .dot{width:14px;height:14px;border-radius:50%;background:#2bf0a9}.live b{font-size:15px;font-weight:500;display:block;line-height:19px}.live small{font-size:12px;color:#95a0b0;display:block;line-height:17px}.bell{width:36px;height:45px;display:grid;place-items:center}.bell svg{width:28px;height:28px;fill:none;stroke:#f5f7fb;stroke-width:2}
+.tabs{display:flex;gap:8px;overflow:hidden;margin:0 4px 20px}.tab{height:53px;flex:0 0 auto;padding:0 17px;border:1px solid #203c59;border-radius:18px;background:linear-gradient(#0c2033,#091a2a);display:flex;align-items:center;gap:9px;font-size:15.5px;white-space:nowrap}.tab.active{background:linear-gradient(#1995ff,#0d7eef);border-color:#1995ff}.sportIcon{width:22px;height:22px;display:grid;place-items:center;border:1.5px solid #d9e1eb;border-radius:50%;font-size:13px}
+.filters{display:grid;grid-template-columns:1fr 1.35fr 1.2fr;gap:9px;margin:0 4px 18px}.filter{height:53px;border:1px solid #244665;border-radius:17px;background:linear-gradient(#091a2b,#081727);display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 13px;min-width:0}.filter span{display:flex;align-items:center;gap:8px;font-size:13.5px;white-space:nowrap}.filter svg{width:22px;height:22px;stroke:#dbe7f3;fill:none;stroke-width:1.8}.filter .blue{stroke:#28a1ff}.filter b{color:#28a1ff}.chev{width:10px!important;height:10px!important;transform:rotate(45deg);border-right:2px solid #9aa7b6;border-bottom:2px solid #9aa7b6}
+.card{position:relative;background:linear-gradient(145deg,#091b2c,#071727);border:1px solid #102d46;border-radius:24px;padding:14px 17px 11px;margin-bottom:14px;box-shadow:0 14px 30px rgba(0,0,0,.22);overflow:hidden}.cardTop{display:flex;justify-content:space-between;align-items:center;color:#8f9caf;font-size:14px;margin-bottom:14px}.league{display:flex;align-items:center;gap:8px}.flag{width:25px;height:25px;border-radius:50%;object-fit:cover}.time{color:#919baa}
+.match{display:grid;grid-template-columns:1fr 27px 1fr 173px;align-items:center;gap:4px}.team{display:flex;align-items:center;gap:8px;min-width:0}.team img{width:43px;height:43px;object-fit:contain;flex:0 0 43px}.team b{font-size:16px;line-height:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vs{text-align:center;color:#6f7e90;font-size:13px;font-weight:600}.market{grid-column:1/4;display:flex;align-items:center;gap:8px;font-size:15px;margin-top:7px}.market svg{width:21px;height:21px;stroke:#d9e5f2;fill:none;stroke-width:1.7}
+.margin{grid-column:4;grid-row:1/3;border:1px solid #096d58;border-radius:17px;background:linear-gradient(#09282c99,#071b23b3);height:116px;padding:12px;display:flex;flex-direction:column;justify-content:center;position:relative}.margin small{font-size:13px;color:#5ff0c1}.margin strong{font-size:37px;line-height:43px;color:#59f1bd;letter-spacing:-1.5px}.outcomes{font-size:13px;border:1px solid #29455f;border-radius:18px;padding:5px 10px;align-self:flex-start;color:#e7ebf0;margin-top:3px}.micon{position:absolute;right:13px;top:28px}.micon svg{width:22px;height:22px;stroke:#8ba0b4;fill:none}
+.odds{display:grid;grid-template-columns:1fr 1fr;gap:9px;grid-column:1/4;margin-top:9px}.odd{height:69px;border:1px solid #1b3853;border-radius:16px;background:linear-gradient(#0a2033,#081a2b);display:grid;grid-template-columns:43px 1fr auto;align-items:center;padding:8px 9px;gap:7px;position:relative}.booklogo{width:41px;height:41px;border-radius:11px;object-fit:contain;background:#fff}.odd b{font-size:15px;line-height:18px;display:block}.odd small{display:block;color:#a9b4c2;font-size:13px;margin-top:3px}.price{font-size:24px;font-weight:800;color:#2698ff}.odd:after{content:"";position:absolute;right:8px;top:10px;width:8px;height:8px;border-radius:50%;background:#193a55}
+.calc{height:61px;border:0;border-radius:18px;background:linear-gradient(#1b96ff,#087ff1);width:calc(100% - 54px);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:11px;font-size:20px;font-weight:600;box-shadow:0 9px 20px rgba(0,126,240,.17);cursor:pointer}.calc svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8}.star{position:absolute;right:16px;bottom:13px;width:42px;height:42px;border-radius:50%;border:1px solid #1d3851;background:#071625;display:grid;place-items:center}.star svg{width:26px;height:26px;fill:none;stroke:#e6edf5;stroke-width:1.7}.star.on svg{fill:#ffd86a;stroke:#ffd86a}
+.bottom{position:fixed;z-index:20;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);height:76px;background:rgba(5,16,27,.97);border-top:1px solid #1a324a;display:grid;grid-template-columns:repeat(3,1fr);padding-bottom:env(safe-area-inset-bottom)}.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#77869b;font-size:14px;font-weight:600;background:none;border:0}.nav svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8}.nav.active{color:#168cff}
+.toast{position:fixed;z-index:40;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;background:#10283d;border:1px solid #28506e;border-radius:14px;padding:10px 16px;font-size:14px;transition:.2s;pointer-events:none;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:520px){.app{padding-left:16px;padding-right:16px}.bell{display:none}.match{grid-template-columns:1fr 25px 1fr 173px}.team img{width:41px;height:41px;flex-basis:41px}.team b{font-size:15.5px}}
+@media(max-width:420px){.brandtext h1{font-size:29px}.brandtext p{font-size:9.5px}.live{width:165px;min-width:0}.tab{padding:0 15px}.filter span{font-size:13px}.match{grid-template-columns:1fr 24px 1fr 163px}.team img{width:39px;height:39px;flex-basis:39px}.margin{height:112px}.margin strong{font-size:35px}.odd{height:67px}.price{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+<div class="brand"><div class="brandmark"><i></i><i></i><i></i><i></i></div><div class="brandtext"><h1>Bet<span>Tracker</span></h1><p>SIKKERBETS · ENKLERE · STØRRE OVERBLIK</p></div></div>
+<div class="headerRight"><div class="live"><span class="dot"></span><div><b>Live odds</b><small>Opdateret 12:24</small></div></div><div class="bell"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></div></div>
+</header>
+<div class="tabs">
+<button class="tab active">Alle</button><button class="tab"><span class="sportIcon">●</span>Fodbold</button><button class="tab"><span class="sportIcon">✦</span>Basketball</button><button class="tab"><span class="sportIcon">◒</span>Tennis</button><button class="tab">Flere <span>⌄</span></button>
+</div>
+<div class="filters">
+<button class="filter"><span><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h12M3 18h7"/></svg>Ligaer</span><i class="chev"></i></button>
+<button class="filter"><span><svg class="blue" viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V3"/></svg>Min. margin: <b>3%</b></span><i class="chev"></i></button>
+<button class="filter"><span><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h6"/></svg>Nyeste først</span><i class="chev"></i></button>
+</div>
+
+<main>
+<article class="card">
+<div class="cardTop"><span class="league"><img class="flag" src="https://flagcdn.com/w40/dk.png">Danmark · Superligaen</span><span class="time">I dag 19:00</span></div>
+<div class="match">
+<div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/FC%20Copenhagen.png"><b>FC København</b></div><div class="vs">VS</div><div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Br%C3%B6ndby%20IF.png"><b>Brøndby IF</b></div>
+<div class="margin"><small>MARGIN</small><strong>5.00%</strong><span class="outcomes">2 udfald ⓘ</span><span class="micon"><svg viewBox="0 0 24 24"><path d="M5 18v-5m5 5V8m5 10V5m5 13v-8"/></svg></span></div>
+<div class="market"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>Over/Under 2,5 mål</div>
+<div class="odds"><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=bet365.com&sz=128"><div><b>Bet365</b><small>Over 2,5</small></div><strong class="price">2.10</strong></div><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=nordicbet.com&sz=128"><div><b>NordicBet</b><small>Under 2,5</small></div><strong class="price">2.10</strong></div></div>
+</div><button class="calc" onclick="toast('Beregn indsats · FC København vs Brøndby IF')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"/></svg>Beregn indsats <span>→</span></button><button class="star" onclick="fav(this)"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button>
+</article>
+
+<article class="card">
+<div class="cardTop"><span class="league"><img class="flag" src="https://flagcdn.com/w40/gb.png">England · Premier League</span><span class="time">I dag 16:00</span></div>
+<div class="match">
+<div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Manchester%20City.png"><b>Manchester City</b></div><div class="vs">VS</div><div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Arsenal%20FC.png"><b>Arsenal</b></div>
+<div class="margin"><small>MARGIN</small><strong>4.32%</strong><span class="outcomes">2 udfald ⓘ</span><span class="micon"><svg viewBox="0 0 24 24"><path d="M5 18v-5m5 5V8m5 10V5m5 13v-8"/></svg></span></div>
+<div class="market"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>Begge hold scorer</div>
+<div class="odds"><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=unibet.com&sz=128"><div><b>Unibet</b><small>Ja</small></div><strong class="price">1.95</strong></div><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=expekt.com&sz=128"><div><b>Expekt</b><small>Nej</small></div><strong class="price">2.05</strong></div></div>
+</div><button class="calc" onclick="toast('Beregn indsats · Manchester City vs Arsenal')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"/></svg>Beregn indsats <span>→</span></button><button class="star" onclick="fav(this)"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button>
+</article>
+
+<article class="card">
+<div class="cardTop"><span class="league"><img class="flag" src="https://flagcdn.com/w40/es.png">Spanien · La Liga</span><span class="time">I dag 21:00</span></div>
+<div class="match">
+<div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Real%20Madrid.png"><b>Real Madrid</b></div><div class="vs">VS</div><div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/FC%20Barcelona.png"><b>Barcelona</b></div>
+<div class="margin"><small>MARGIN</small><strong>3.61%</strong><span class="outcomes">2 udfald ⓘ</span><span class="micon"><svg viewBox="0 0 24 24"><path d="M5 18v-5m5 5V8m5 10V5m5 13v-8"/></svg></span></div>
+<div class="market"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>Over/Under 3,5 mål</div>
+<div class="odds"><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=leovegas.com&sz=128"><div><b>LeoVegas</b><small>Over 3,5</small></div><strong class="price">2.25</strong></div><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=betsson.com&sz=128"><div><b>Betsson</b><small>Under 3,5</small></div><strong class="price">1.95</strong></div></div>
+</div><button class="calc" onclick="toast('Beregn indsats · Real Madrid vs Barcelona')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"/></svg>Beregn indsats <span>→</span></button><button class="star" onclick="fav(this)"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button>
+</article>
+
+<article class="card">
+<div class="cardTop"><span class="league"><img class="flag" src="https://flagcdn.com/w40/it.png">Italien · Serie A</span><span class="time">I dag 18:00</span></div>
+<div class="match">
+<div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Inter%20Milan.png"><b>Inter</b></div><div class="vs">VS</div><div class="team"><img src="https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/AC%20Milan.png"><b>AC Milan</b></div>
+<div class="margin"><small>MARGIN</small><strong>3.28%</strong><span class="outcomes">2 udfald ⓘ</span><span class="micon"><svg viewBox="0 0 24 24"><path d="M5 18v-5m5 5V8m5 10V5m5 13v-8"/></svg></span></div>
+<div class="market"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>Begge hold scorer</div>
+<div class="odds"><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=betano.com&sz=128"><div><b>Betano</b><small>Ja</small></div><strong class="price">1.90</strong></div><div class="odd"><img class="booklogo" src="https://www.google.com/s2/favicons?domain=danskespil.dk&sz=128"><div><b>Danske Spil</b><small>Nej</small></div><strong class="price">2.00</strong></div></div>
+</div><button class="calc" onclick="toast('Beregn indsats · Inter vs AC Milan')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"/></svg>Beregn indsats <span>→</span></button><button class="star" onclick="fav(this)"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4-5.6-3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button>
+</article>
+</main>
+</div>
+<nav class="bottom"><button class="nav active"><svg viewBox="0 0 24 24"><path d="M4 20V10m5 10V6m5 14V3m5 17v-7"/></svg>SikkerBets</button><button class="nav" onclick="toast('Beregn')"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 11h1m4 0h1M9 15h1m4 0h1M9 18h1m4 0h1"/></svg>Beregn</button><button class="nav" onclick="toast('Stats')"><svg viewBox="0 0 24 24"><path d="M12 12V3a9 9 0 1 1-9 9h9Z"/><path d="M12 12h9a9 9 0 0 0-9-9v9Z"/></svg>Stats</button></nav>
+<div class="toast" id="toastBox"></div>
+<script>
+function toast(t){var x=document.getElementById('toastBox');x.textContent=t;x.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(function(){x.classList.remove('show')},1800)}
+function fav(el){el.classList.toggle('on');toast(el.classList.contains('on')?'Tilføjet til favoritter':'Fjernet fra favoritter')}
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});b.classList.add('active');toast(b.textContent.trim()+' valgt')})});
+document.querySelectorAll('.filter').forEach(function(b){b.addEventListener('click',function(){toast('Filter åbnet')})});
+</script>
+</body>
+</html>
